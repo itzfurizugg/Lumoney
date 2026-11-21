@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../core/utils/currency_format.dart';
 import '../../data/database/app_database.dart';
 import '../../data/providers.dart';
+import '../../shared/widgets/app_fade_in.dart';
 import 'savings_detail_screen.dart';
 import 'savings_form_screen.dart';
 
@@ -50,9 +51,10 @@ class SavingsScreen extends ConsumerWidget {
             final entries = ref.watch(savingsEntriesProvider(g.id)).valueOrNull ?? [];
             return sum + entries.fold<int>(0, (s, e) => s + e.amount);
           });
-          return ListView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
-            children: [
+          return AppFadeIn(
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
+              children: [
               Card(
                 margin: EdgeInsets.zero,
                 color: cs.primaryContainer.withValues(alpha: 0.35),
@@ -76,6 +78,7 @@ class SavingsScreen extends ConsumerWidget {
                     child: _GoalCard(goal: g),
                   )),
             ],
+          ),
           );
         },
       ),

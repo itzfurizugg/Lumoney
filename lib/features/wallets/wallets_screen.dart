@@ -6,6 +6,7 @@ import '../../core/utils/currency_format.dart';
 import '../../data/providers.dart';
 import '../../data/repositories/wallet_repository.dart';
 import '../../shared/widgets/app_bar_back_button.dart';
+import '../../shared/widgets/app_fade_in.dart';
 import 'wallet_form_screen.dart';
 
 class WalletsScreen extends ConsumerWidget {
@@ -31,9 +32,10 @@ class WalletsScreen extends ConsumerWidget {
           if (wallets.isEmpty) {
             return Center(child: Text('Belum ada dompet. Tap + untuk menambah.', style: tt.bodyMedium?.copyWith(color: cs.onSurfaceVariant)));
           }
-          return ListView.separated(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
-            itemCount: wallets.length,
+          return AppFadeIn(
+            child: ListView.separated(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
+              itemCount: wallets.length,
             separatorBuilder: (_, _) => const SizedBox(height: 10),
             itemBuilder: (context, i) {
               final w = wallets[i];
@@ -57,6 +59,7 @@ class WalletsScreen extends ConsumerWidget {
                 ),
               );
             },
+          ),
           );
         },
       ),
